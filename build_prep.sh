@@ -2,13 +2,13 @@
 
 : ${APT_UPDATE:="false"}
 
-pkgs="debootstrap binutils genisoimage ruby1.9.3 kvm rpm rpm2cpio python-pip make git-core"
+pkgs="debootstrap binutils genisoimage ruby1.9.3 ruby1.9.1-dev kvm rpm rpm2cpio python-pip gcc make git-core"
 gems="kwalify json net-http-digest_auth"
 pips="pip2pi"
 
 APTGET=$(/usr/bin/env which apt-get)
 [ ${APT_UPDATE} == "true" ] && ${APTGET} update
-${APTGET} install -y --no-install-recommends ${pkgs}
+${APTGET} install -y --no-install-recommends --no-install-suggests ${pkgs}
 
 PIP=$(/usr/bin/env which pip)
 if [[ -n ${PIP} ]]; then for p in ${pips}; do
