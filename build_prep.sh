@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
 
-pkgs="debootstrap binutils genisoimage ruby kvm rpm rpm2cpio python-pip make git-core"
+: ${APT_UPDATE:="false"}
+
+pkgs="debootstrap binutils genisoimage ruby1.9.3 kvm rpm rpm2cpio python-pip make git-core"
 gems="kwalify json net-http-digest_auth"
 pips="pip2pi"
 
 APTGET=$(/usr/bin/env which apt-get)
-${APTGET} install ${pkgs}
+[ ${APT_UPDATE} == "true" ] && ${APTGET} update
+${APTGET} install -y --no-install-recommends ${pkgs}
 
 PIP=$(/usr/bin/env which pip)
-${PIP} install ${pips}
+if [[ -n ${PIP} ]]; then for p in ${pips}; do
+  ${PIP} install ${p}
+done; else echo "pip not found!"; exit 1; fi
 
 GEM=$(/usr/bin/env which gem)
-${GEM} install ${gems}
+if [[ -n ${GEM} ]]; then for g in ${gems}; do
+  ${GEM} install ${g}
+done; else echo "gem not found!"; exit 1; fi
 
