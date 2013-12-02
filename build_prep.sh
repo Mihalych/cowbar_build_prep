@@ -2,7 +2,7 @@
 
 : ${APT_UPDATE:="false"}
 
-pkgs="debootstrap binutils genisoimage ruby1.9.3 ruby1.9.1-dev kvm rpm rpm2cpio python-pip gcc make git-core"
+pkgs="debootstrap binutils genisoimage ruby1.9.3 ruby1.9.1-dev kvm rpm rpm2cpio python-pip gcc make git-core curl"
 gems="kwalify json net-http-digest_auth"
 pips="pip2pi"
 
